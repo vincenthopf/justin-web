@@ -2,14 +2,30 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('posts')).sort((a, b) => {
-  const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
-  const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
-  if (orderA === orderB) {
-    return a.data.title.localeCompare(b.data.title);
-  }
-  return orderA - orderB;
-});
+const posts = (await getCollection('posts'))
+  .map((entry) => {
+    const data = entry.data ?? {};
+    return {
+      ...entry,
+      data: {
+        ...data,
+        title: typeof data.title === 'string' && data.title.trim().length > 0 ? data.title : entry.slug,
+        description: typeof data.description === 'string' ? data.description : '',
+        heroImage: typeof data.heroImage === 'string' ? data.heroImage : undefined,
+        tags: Array.isArray(data.tags)
+          ? data.tags.filter((tag) => typeof tag === 'string' && tag.trim().length > 0)
+          : []
+      }
+    };
+  })
+  .sort((a, b) => {
+    const orderA = typeof a.data.order === 'number' ? a.data.order : Number.MAX_SAFE_INTEGER;
+    const orderB = typeof b.data.order === 'number' ? b.data.order : Number.MAX_SAFE_INTEGER;
+    if (orderA === orderB) {
+      return a.data.title.localeCompare(b.data.title, undefined, { sensitivity: 'base' });
+    }
+    return orderA - orderB;
+  });
 ---
 
 <BaseLayout

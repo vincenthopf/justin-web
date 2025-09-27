@@ -14,14 +14,20 @@ if (!entry) {
   throw new Error(`Post not found: ${slug}`);
 }
 
-const { Content, data } = await entry.render();
+const { Content } = await entry.render();
+const data = entry.data ?? {};
+
+const title = typeof data.title === 'string' && data.title.trim().length > 0 ? data.title : slug;
+const description = typeof data.description === 'string' ? data.description : '';
+const heroImage = typeof data.heroImage === 'string' ? data.heroImage : undefined;
+const tags = Array.isArray(data.tags) ? data.tags.filter((tag) => typeof tag === 'string' && tag.trim().length > 0) : [];
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: data.title,
-  description: data.description,
-  image: data.heroImage,
+  headline: title,
+  description,
+  image: heroImage,
   url: `${Astro.site?.href ?? ''}blog/${slug}`,
   author: {
     '@type': 'Person',
@@ -30,14 +36,14 @@ const structuredData = {
 };
 ---
 
-<BaseLayout title={`${data.title} — The Real Dealmaker`} description={data.description} structuredData={structuredData}>
+<BaseLayout title={`${title} — The Real Dealmaker`} description={description} structuredData={structuredData}>
   <section>
     <article class="post">
       <header class="post-header">
-        <span class="badge">{data.tags.join(' · ')}</span>
-        <h1>{data.title}</h1>
-        {data.heroImage && (
-          <img class="shadowed-image" src={data.heroImage} alt={data.title} loading="eager" />
+        <span class="badge">{tags.join(' · ')}</span>
+        <h1>{title}</h1>
+        {heroImage && (
+          <img class="shadowed-image" src={heroImage} alt={title} loading="eager" />
         )}
       </header>
       <div class="post-content">
