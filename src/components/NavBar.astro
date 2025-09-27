@@ -1,0 +1,204 @@
+---
+const { currentPath = '/' } = Astro.props;
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/join-the-dream-team', label: 'Join The Dream Team' },
+  { href: '/blog', label: 'Blog' }
+];
+---
+
+<nav class="navbar" aria-label="Main">
+  <div class="nav-content">
+    <a class="brand" href="/" aria-label="The Real Dealmaker home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-word">The Real Dealmaker</span>
+    </a>
+    <button
+      class="menu-button"
+      type="button"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      data-menu-button
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="nav-links" id="primary-navigation" data-menu>
+      {links.map((link) => {
+        const active = currentPath === link.href;
+        return (
+          <a
+            class={`nav-link ${active ? 'active' : ''}`}
+            href={link.href}
+            aria-current={active ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        );
+      })}
+      <a class="button" href="https://forms.gle/jXaLfkj4uowQ3fX29" rel="noopener" target="_blank">
+        Justin, I'm ready to do this!
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  const button = document.querySelector('[data-menu-button]');
+  const menu = document.querySelector('[data-menu]');
+
+  function closeOnEscape(event) {
+    if (event.key === 'Escape') {
+      button?.setAttribute('aria-expanded', 'false');
+      menu?.classList.remove('open');
+    }
+  }
+
+  button?.addEventListener('click', () => {
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('open', !expanded);
+    if (!expanded) {
+      document.addEventListener('keydown', closeOnEscape, { once: true });
+    }
+  });
+
+  menu?.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target instanceof HTMLAnchorElement && window.innerWidth < 768) {
+      button?.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('open');
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      button?.setAttribute('aria-expanded', 'true');
+      menu?.classList.add('open');
+    } else {
+      button?.setAttribute('aria-expanded', 'false');
+      menu?.classList.remove('open');
+    }
+  });
+
+  if (window.innerWidth >= 768) {
+    button?.setAttribute('aria-expanded', 'true');
+    menu?.classList.add('open');
+  }
+</script>
+
+<style>
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .brand-word {
+    font-size: 0.95rem;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(111, 0, 255, 0.85), rgba(111, 0, 255, 0.35));
+    position: relative;
+  }
+
+  .brand-mark::after {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.55);
+  }
+
+  .menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    cursor: pointer;
+    color: var(--text);
+  }
+
+  .menu-button svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: var(--radius-medium);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    box-shadow: var(--shadow-soft);
+    min-width: 220px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .nav-links.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav-link {
+    padding: 0.65rem 0.9rem;
+    border-radius: var(--radius-small);
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--accent);
+    background: rgba(111, 0, 255, 0.12);
+  }
+
+  @media (min-width: 768px) {
+    .menu-button {
+      display: none;
+    }
+
+    .nav-links {
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+      min-width: auto;
+    }
+
+    .nav-link {
+      padding: 0;
+      background: transparent;
+    }
+  }
+</style>

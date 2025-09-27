@@ -1,0 +1,46 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).sort((a, b) => {
+  const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
+  const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
+  if (orderA === orderB) {
+    return a.data.title.localeCompare(b.data.title);
+  }
+  return orderA - orderB;
+});
+---
+
+<BaseLayout
+  title="Blog — The Real Dealmaker"
+  description="Preparing Your Business To Exit At Top Dollar Valuation Part 2, Join The Dream Team, Preparing Your Business To Exit At Top Dollar Valuation Part 1, and Who I Am And Why It Matters To You!"
+>
+  <section>
+    <div class="section-heading">
+      <span class="badge">Blog</span>
+      <h1>Blog</h1>
+    </div>
+    <div class="card-grid">
+      {posts.map((post) => (
+        <article class="card">
+          {post.data.heroImage && (
+            <a href={post.slug}>
+              <img class="shadowed-image" src={post.data.heroImage} alt={post.data.title} loading="lazy" />
+            </a>
+          )}
+          <h2><a href={post.slug}>{post.data.title}</a></h2>
+          <p>{post.data.description}</p>
+          {post.data.tags.length > 0 && (
+            <ul class="tag-list">
+              {post.data.tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+          )}
+          <a class="button secondary" href={post.slug} style="margin-top:1.25rem;">Read More</a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

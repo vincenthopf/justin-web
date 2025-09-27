@@ -1,0 +1,71 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+
+const qualities = [
+  'Confident & Humble',
+  'Action Oriented',
+  'Open to Learning',
+  'Accountable',
+  'Growth Oriented',
+  'Do What You Say You Will Do',
+  'When You Say You Will Do It',
+  'Ready to Make BIG Things Happen!'
+];
+---
+
+<BaseLayout
+  title="Join The Dream Team — The Real Dealmaker"
+  description="A Players Wanted! Justin Fishman is collaborating with rising stars committed to living their very best life."
+>
+  <section>
+    <div class="section-heading">
+      <span class="badge">A Players Wanted!</span>
+      <h1>Join The Dream Team</h1>
+    </div>
+    <div class="card" style="max-width:800px; margin:0 auto;">
+      <p>My mission is to inspire you. To show you that anything is truly possible. I mean anything!</p>
+      <p>YOU have the power to create an amazing life.</p>
+      <p>This happens within your focus, within your words, within your actions, all within WHO you are being.</p>
+      <p>Now is the time to have it all.</p>
+      <p>My commitment is to show you HOW its possible.</p>
+      <p>I am committed to making a difference through solid communication, collaboration, teamwork.</p>
+      <p>Right now I am collaborating with rising stars who are committed to living their very best life.</p>
+      <p>Do you have what it takes to win with me?</p>
+      <p>I am looking for awesome people with the following quality characteristics.</p>
+      <ul class="quality-list">
+        {qualities.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+      <p style="margin-top:2rem; font-weight:600;">Justin Fishman, The Real Dealmaker™</p>
+      <a class="button" href="https://forms.gle/jXaLfkj4uowQ3fX29" target="_blank" rel="noopener">
+        Join the dream team
+      </a>
+    </div>
+  </section>
+
+<style>
+  .quality-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .quality-list li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-small);
+    border: 1px solid var(--border);
+    background: var(--bg-muted);
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .quality-list li::before {
+    content: '✅';
+  }
+</style>
+</BaseLayout>

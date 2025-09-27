@@ -1,0 +1,271 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+
+const framework = [
+  {
+    title: 'Break Barriers',
+    description: 'Identify and eliminate the hidden obstacles preventing your next big breakthrough.'
+  },
+  {
+    title: 'Gain Clarity',
+    description: 'Discover the strategic framework for making powerful choices that lead to limitless success.'
+  },
+  {
+    title: 'Reduce Stress',
+    description: 'Gain back your time to experience a more exciting and truly fulfilled life.'
+  },
+  {
+    title: 'Achieve Consistency',
+    description: 'Install automated success systems that don’t rely on your motivation or willpower.'
+  }
+];
+
+const beforeAfter = {
+  before: [
+    'Burnt out, stressed and overwhelmed',
+    'Unsure where to focus',
+    'Second guessing decisions',
+    'Secretly struggling despite outward success'
+  ],
+  after: [
+    'A proven framework for growth',
+    'Focused on high value actions rather than busy work',
+    'Full clarity, soaring higher with less effort',
+    '3x to 10x more productive and profitable'
+  ]
+};
+
+const testimonials = [
+  {
+    image: 'https://i0.wp.com/therealdealmaker.com/wp-content/uploads/2025/09/Justin_Fishman_Private_Coachin_Client_Testimonial_Mike1.jpg?fit=1024%2C327&ssl=1',
+    alt: 'Justin Fishman Private Coaching Client Testimonial Mike'
+  },
+  {
+    image: 'https://i0.wp.com/therealdealmaker.com/wp-content/uploads/2025/09/Justin_Fishman_Private_Coachin_Client_Testimonial_Gabe.jpg?fit=1024%2C274&ssl=1',
+    alt: 'Justin Fishman Private Coaching Client Testimonial Gabe'
+  },
+  {
+    image: 'https://i0.wp.com/therealdealmaker.com/wp-content/uploads/2025/09/Justin_Fishman_Private_Coachin_Client_Testimonial_Julie-1.jpg?fit=1024%2C321&ssl=1',
+    alt: 'Justin Fishman Private Coaching Client Testimonial Julie'
+  }
+];
+
+const gallery = [
+  {
+    image: 'https://i0.wp.com/therealdealmaker.com/wp-content/uploads/2025/04/Justin_Fishman_With_Kris_Dehnert_Dugout_Mugs.jpg?fit=717%2C640&ssl=1',
+    caption: 'Justin with Kris Dehnert CEO of Dugout Mugs'
+  },
+  {
+    image: 'https://i0.wp.com/therealdealmaker.com/wp-content/uploads/2025/04/Justin_Fishman_Speaking.jpg?fit=805%2C442&ssl=1',
+    caption: 'Justin Preparing to Speak at an Event'
+  },
+  {
+    image: 'https://i0.wp.com/therealdealmaker.com/wp-content/uploads/2025/04/Justin_Fishman_Forbes_Riley_1-2-scaled.jpg?fit=2560%2C2330&ssl=1',
+    caption: 'Justin with Forbes Riley'
+  }
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Justin Fishman',
+  alternateName: 'The Real Dealmaker',
+  jobTitle: 'Top Growth and Performance Coach',
+  description:
+    'I WILL PERSONALLY GUIDE YOU TO OVERCOME ANY CHALLENGE TO UNLOCK UNLIMITED GROWTH AND 5-10X YOUR RESULTS.',
+  image: 'https://i0.wp.com/therealdealmaker.com/wp-content/uploads/2025/04/Jusin_Fishman_The_Real_Dealmaker__.jpg?fit=755%2C1080&ssl=1',
+  url: 'https://therealdealmaker.com/',
+  sameAs: [
+    'https://forms.gle/jXaLfkj4uowQ3fX29'
+  ]
+};
+---
+
+<BaseLayout
+  title="Home — The Real Dealmaker"
+  description="I WILL PERSONALLY GUIDE YOU TO OVERCOME ANY CHALLENGE TO UNLOCK UNLIMITED GROWTH AND 5-10X YOUR RESULTS."
+  structuredData={structuredData}
+>
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="badge">EXCLUSIVELY FOR TOP PERFORMERS READY TO LEVEL UP WITH CLARITY AND CONFIDENCE!</span>
+        <h1>I WILL PERSONALLY GUIDE YOU TO OVERCOME ANY CHALLENGE TO UNLOCK UNLIMITED GROWTH AND 5-10X YOUR RESULTS.</h1>
+        <p>
+          Discover the 4-step framework to unlock unlimited growth with rapid results… Even If You’ve Tried Before And Failed, Have Been Stuck For Awhile, Feel About Burnt Out, Been Frustrated Or Just Don’t See How To Overcome The Challenges You Face!
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="https://forms.gle/jXaLfkj4uowQ3fX29" target="_blank" rel="noopener">
+            Justin, I’m ready to do this!
+          </a>
+          <a class="button secondary" href="#framework">THE FOUR STEP FRAMEWORK TO LASTING TRANSFORMATION</a>
+        </div>
+        <ul class="hero-callouts">
+          <li>JUSTIN FISHMAN, Top Growth and Performance Coach</li>
+          <li>There are 12 common break points acting as barriers at each stage of growth.</li>
+          <li>This simple framework shifts the focus from tactics to key insights, creating the rapid, exponential growth that leads to real personal and professional transformation.</li>
+          <li>Ultimately, this is about impact and income acceleration, enabling my clients to 10X their growth while others struggle to 2X.</li>
+        </ul>
+      </div>
+      <div class="hero-media">
+        <img
+          class="shadowed-image"
+          src="https://i0.wp.com/therealdealmaker.com/wp-content/uploads/2025/04/Jusin_Fishman_The_Real_Dealmaker__.jpg?fit=755%2C1080&ssl=1"
+          alt="Justin Fishman, The Real Dealmaker"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="framework">
+    <div class="section-heading">
+      <span class="badge">THE FOUR STEP FRAMEWORK TO LASTING TRANSFORMATION!</span>
+      <h2>This simple framework shifts the focus from tactics to key insights.</h2>
+    </div>
+    <div class="card-grid">
+      {framework.map((step) => (
+        <article class="card">
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="card-grid">
+      <article class="card">
+        <h3>As entrepreneurs reach for new levels of success</h3>
+        <p>
+          As entrepreneurs reach for new levels of success, moving from $100K to $100M, they often hit invisible barriers stopping them in their tracks. It’s not for a lack of effort; there are 12 common ‘break points’ acting as barriers at each stage of growth, keeping them from truly leveling up.
+        </p>
+        <p>
+          This cycle of getting stuck often leads to stagnation, burnout, and overwhelm. After coaching hundreds of clients through every level of their journey, I’ve developed a simple 4-step framework that cuts through the noise to get real results.
+        </p>
+      </article>
+      <article class="card">
+        <h3>It’s a gateway to unlimited opportunity</h3>
+        <p>
+          This goes beyond just a step to the next level. It’s a gateway to unlimited opportunity, designing a lasting legacy, and leading a more fulfilling and enjoyable life.
+        </p>
+        <p>
+          Ultimately, this is about impact and income acceleration, enabling my clients to 10X their growth while others struggle to 2X. Install automated success systems that don’t rely on your motivation or willpower and soar higher with less effort.
+        </p>
+        <a class="button" href="https://forms.gle/jXaLfkj4uowQ3fX29" target="_blank" rel="noopener">
+          apply to become a client
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <span class="badge">CLIENT SUCCESS AND TRANSFORMATION</span>
+      <h2>CLIENT SUCCESS AND TRANSFORMATION</h2>
+    </div>
+    <div class="card-grid">
+      {testimonials.map((testimonial) => (
+        <figure class="card" style="padding:1rem;">
+          <img class="shadowed-image" src={testimonial.image} alt={testimonial.alt} loading="lazy" />
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <span class="badge">FROM FRAZZLED TO FOCUSED</span>
+      <h2>FROM FRAZZLED TO FOCUSED</h2>
+    </div>
+    <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+      <article class="card">
+        <h3>Before Working With Justin</h3>
+        <ul class="list-grid">
+          {beforeAfter.before.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </article>
+      <article class="card">
+        <h3>After Working With Justin</h3>
+        <ul class="list-grid">
+          {beforeAfter.after.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <span class="badge">IF YOU'RE NOT ACTIVELY GROWING THEN YOU'RE FALLING BEHIND AND MISSING OUT...</span>
+      <h2>IF YOU'RE TRYING TO DO IT ALL ON YOUR OWN YOU'RE LIMITED BY WHAT YOU THINK IS POSSIBLE!</h2>
+    </div>
+    <div class="cta-panel card">
+      <p>
+        TO SUCCEED AT THE HIGHEST OF LEVELS PERSONAL AND PROFESSIONAL MASTERY IS MORE CRITICAL TODAY THEN EVER BEFORE.
+      </p>
+      <p>
+        THE SMARTEST PEOPLE ALL HAVE PERFORMANCE AND GROWTH COACHING. REGULARLY TO HELP THEM CONQUER THEIR BLIND SPOTS STAY TWO STEPS AHEAD, AND REMAIN AT THE TOP OF THEIR GAME.
+      </p>
+      <a class="button" href="https://forms.gle/jXaLfkj4uowQ3fX29" target="_blank" rel="noopener">
+        Justin, I’m ready to do this!
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <span class="badge">Friends, Colleagues & Awesome People We've Met & Done Business With Along The Way</span>
+      <h2>Friends, Colleagues & Awesome People We've Met & Done Business With Along The Way</h2>
+    </div>
+    <div class="card-grid">
+      {gallery.map((item) => (
+        <figure class="card" style="padding:1rem;">
+          <img class="shadowed-image" src={item.image} alt={item.caption} loading="lazy" />
+          <figcaption style="margin-top:1rem; color:var(--text-muted); font-weight:600;">{item.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .hero-media {
+    position: relative;
+  }
+
+  .hero-media::before {
+    content: '';
+    position: absolute;
+    inset: 18px;
+    border-radius: var(--radius-large);
+    background: rgba(111, 0, 255, 0.1);
+    filter: blur(60px);
+    z-index: -1;
+  }
+
+  .cta-panel {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 720px) {
+    .hero {
+      padding-top: 5rem;
+    }
+  }
+</style>

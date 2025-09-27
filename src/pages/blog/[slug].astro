@@ -1,0 +1,63 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection, getEntryBySlug } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({ params: { slug: post.slug } }));
+}
+
+const { slug } = Astro.params;
+const entry = await getEntryBySlug('posts', slug);
+
+if (!entry) {
+  throw new Error(`Post not found: ${slug}`);
+}
+
+const { Content, data } = await entry.render();
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  image: data.heroImage,
+  url: `${Astro.site?.href ?? ''}blog/${slug}`,
+  author: {
+    '@type': 'Person',
+    name: 'Justin Fishman'
+  }
+};
+---
+
+<BaseLayout title={`${data.title} — The Real Dealmaker`} description={data.description} structuredData={structuredData}>
+  <section>
+    <article class="post">
+      <header class="post-header">
+        <span class="badge">{data.tags.join(' · ')}</span>
+        <h1>{data.title}</h1>
+        {data.heroImage && (
+          <img class="shadowed-image" src={data.heroImage} alt={data.title} loading="eager" />
+        )}
+      </header>
+      <div class="post-content">
+        <Content />
+      </div>
+    </article>
+  </section>
+</BaseLayout>
+
+<style>
+  .post {
+    max-width: 820px;
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .post-header {
+    display: grid;
+    gap: 1.5rem;
+    text-align: center;
+  }
+</style>
